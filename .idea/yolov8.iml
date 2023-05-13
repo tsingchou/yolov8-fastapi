@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/env/lib/python3.8" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/env/lib/python3.8/lib-dynload" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/env/lib/python3.8/site-packages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ultralytics" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="yolov8" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
