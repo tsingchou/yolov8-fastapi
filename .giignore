@@ -1,1 +1,2 @@
-/ultralytics
+/ultralytics/
+/__pycache__/
