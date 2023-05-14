@@ -1,8 +1,9 @@
 # yolov8-fastapi
+This is an API for detecting LPG inspection images using YOLOv8 and FastAPI.
 
 ## Quickstart
 Before using this repository!
-Please replace the weight file in /data/model/best.pt with your own trained model unless you want to detect LPG inspection images.
+Please replace the weight file in /data/model/best.pt with your own trained model, unless you want to detect LPG inspection images.
 
 ## Installation
 Build and start YOLOv8 with FASTAPI on http://localhost:9099
@@ -39,7 +40,7 @@ http://localhost:9099/token
 ```
 http://localhost:9099/token
 ```
-Accept URL or Base64 image, and return the prediction result in JSON format.
+Accepts URL or base64 image, and returns the prediction result in JSON format.
 
 ### Users
 Users are stored in table ```users``` of ```./sysuser.sqlite```, and the default username and password are ```admin``` and ```admin```.
