@@ -182,6 +182,8 @@ async def predict(user: User = Depends(verify_jwt_token), imageToPredict: ImageT
     elif imageToPredict.type == "base64":
         # 将 base64 编码的图片保存到本地DOWNLOAD_IMG_BASE_DIR
         img_path = base64_to_img(imageToPredict.base64, date)
+    else:
+        return {"code": 400, "msg": "type 参数错误！"}
     result = yolo(
         source=img_path,
         conf=0.25,
