@@ -8,6 +8,8 @@ from datetime import timedelta
 # import aioredis
 import cv2
 import jwt
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException, status
 from fastapi import FastAPI
@@ -185,6 +187,7 @@ async def predict(user: User = Depends(verify_jwt_token), imageToPredict: ImageT
         conf=0.25,
         # device="cpu",
     )
+    names = result[0].names
     # 将预测结果中的图片和标签保存到本地PREDICT_BASE_DIR
     predict_path = os.path.join(PREDICT_BASE_DIR, date)
     if not os.path.exists(predict_path):
@@ -192,9 +195,20 @@ async def predict(user: User = Depends(verify_jwt_token), imageToPredict: ImageT
     predict_name = img_path.split("/")[-1]
     predict_path = os.path.join(predict_path, predict_name)
     # 将result中的BOXES描绘到原图上，并保存到本地
-    img = result[0].plot(font="Arial",line_width=2,font_size=15)
-    # 将RGB转换成BGR
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    img = result[0].plot(font="Arial", line_width=2, font_size=15)
+    for i in range(len(result[0].boxes.data)):
+        classname = names[int(result[0].boxes.cls[i].item())]
+        confidence = float(result[0].boxes.conf[i].item())
+        label = f"{classname} {confidence:.2f}"
+        xywh = result[0].boxes.xywh[i].tolist()
+        # x1,y1分别是左上角的坐标，x2,y2分别是右下角的坐标
+        x1 = int(xywh[0] - xywh[2] / 2)
+        y1 = int(xywh[1] - xywh[3] / 2) - 15
+        # 使用PIL将label写到图片上x1,y1的位置
+        img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+        draw = ImageDraw.Draw(img)
+        draw.text((x1, y1), label, (255, 255, 255), font=ImageFont.truetype("./SimHei.ttf", 14))
+        img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
     # 保存图片
     cv2.imwrite(predict_path, img)
     # 将预测结果中的标签保存到predict_path同文件夹，后缀改成.json
