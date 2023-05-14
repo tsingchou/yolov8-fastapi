@@ -3,7 +3,7 @@ This is an API for detecting LPG inspection images using YOLOv8 and FastAPI.
 
 ## Quickstart
 Before using this repository!
-Please replace the weight file in /data/model/best.pt with your own trained model, unless you want to detect LPG inspection images.
+Please replace the weight file /data/model/best.pt with your own trained model, unless you want to detect LPG inspection images.
 
 ## Installation
 Build and start YOLOv8 with FASTAPI on http://localhost:9099
