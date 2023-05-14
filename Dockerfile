@@ -15,6 +15,7 @@ RUN  sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN  apt-get update
 RUN  apt-get install ffmpeg libsm6 libxext6  -y
 
+RUN mkdir -p /root/.config/Ultralytics/
 RUN cp ./Arial.Unicode.ttf  /root/.config/Ultralytics/Arial.Unicode.ttf
 
 CMD exec uvicorn main:app --reload --host 0.0.0.0 --port $PORT
