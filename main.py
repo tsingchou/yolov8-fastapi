@@ -1,42 +1,23 @@
-import sys
-import uuid
-
-import cv2
-import numpy as np
-from PIL import Image
-from dotenv import load_dotenv
-from torch.utils.tensorboard.summary import draw_boxes
-
-from ultralytics import YOLO
-import re
-import urllib
-import pytz
-from datetime import datetime, timedelta
-import jwt
-from starlette.requests import Request
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-import json
-from fastapi import Depends
-from pydantic import BaseModel
-from starlette.middleware.cors import CORSMiddleware
-import requests
-from fastapi.staticfiles import StaticFiles
 import base64
-import math
-import hashlib
-from datetime import datetime
-import random
 import os
-import json
-from typing import List, Set, Optional
-from fastapi import FastAPI, Depends, Form, WebSocket, WebSocketDisconnect, File, UploadFile, HTTPException, status
-from starlette.responses import FileResponse
-import asyncio
-import pandas as pd
-from fastapi import FastAPI
-import aioredis
 import sqlite3
-from model import User, ImageToPredict, Result
+import urllib
+import uuid
+from datetime import datetime
+from datetime import timedelta
+# import aioredis
+import cv2
+import jwt
+from dotenv import load_dotenv
+from fastapi import Depends, HTTPException, status
+from fastapi import FastAPI
+from fastapi.security import OAuth2PasswordBearer
+from fastapi.staticfiles import StaticFiles
+from starlette.middleware.cors import CORSMiddleware
+from starlette.requests import Request
+from model import User, ImageToPredict
+from ultralytics import YOLO
+
 
 load_dotenv()
 
@@ -82,13 +63,13 @@ app.add_middleware(
 # OAuth2 密码模式
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-
-# 创建 Redis 连接池
-async def get_redis_pool():
-    redis_host = os.getenv("REDIS_HOST")
-    redis_port = os.getenv("REDIS_PORT")
-    redis = await aioredis.from_url(f"redis://{redis_host}:{redis_port}", encoding="utf-8", decode_responses=True)
-    return redis
+#
+# # 创建 Redis 连接池
+# async def get_redis_pool():
+#     redis_host = os.getenv("REDIS_HOST")
+#     redis_port = os.getenv("REDIS_PORT")
+#     redis = await aioredis.from_url(f"redis://{redis_host}:{redis_port}", encoding="utf-8", decode_responses=True)
+#     return redis
 
 
 # 获取用户信息
@@ -211,7 +192,7 @@ async def predict(user: User = Depends(verify_jwt_token), imageToPredict: ImageT
     predict_name = img_path.split("/")[-1]
     predict_path = os.path.join(predict_path, predict_name)
     # 将result中的BOXES描绘到原图上，并保存到本地
-    img = result[0].plot()
+    img = result[0].plot(font="Arial",line_width=2,font_size=15)
     # 将RGB转换成BGR
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     # 保存图片

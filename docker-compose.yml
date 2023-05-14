@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  server:
+    container_name: yolov8-fastapi
+    build: .
+    env_file:
+      - .env
+    environment:
+      - MODEL_DIR=/data/models
+    ports:
+      - 9099:9099
+    volumes:
+      - "./:/app"

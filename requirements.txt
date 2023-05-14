@@ -1,0 +1,24 @@
+rq==1.10.1
+matplotlib>=3.2.2
+numpy>=1.18.5
+Pillow>=7.1.2
+PyYAML>=5.3.1
+requests>=2.23.0
+scipy>=1.4.1
+torch==1.13.1
+torchvision==0.14.1
+tqdm>=4.64.0
+tensorboard>=2.4.1
+pandas>=1.1.4
+seaborn>=0.11.0
+ipython  # interactive notebook
+psutil  # system utilization
+thop>=0.1.1  # FLOPs computation
+omegaconf>=2.3.0
+ultralytics==8.0.90
+opencv-python-headless>=4.6.0
+fastapi>=0.95.0
+uvicorn[standard]
+PyJWT>=2.6.0
+python-dotenv>=1.0.0
+aioredis>=2.0.0
