@@ -2,8 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ultralytics" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ultralytics/yolo-fastapi" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/yolov8-fastapi" vcs="Git" />
   </component>
 </project>
