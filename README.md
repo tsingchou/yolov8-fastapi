@@ -13,6 +13,24 @@ Build and start YOLOv8 with FASTAPI on http://localhost:9099
 ### Rebuild
 ```docker-compose up --build```
 
+## Directories
+```
+--/app
+   |--/data
+      |--/download  # downloaded images
+      |--/predict   # predicted images and json files
+      |--/model     # weight file
+```
+
+## Response
+```
+{
+    "original_img": ,
+    "predict_img": ,
+    "result": result[0].tojson() 
+}
+```
+
 ## Usage
 ### Models
 There are 2 Models in model.py:
