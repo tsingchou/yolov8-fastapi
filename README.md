@@ -22,20 +22,11 @@ Build and start YOLOv8 with FASTAPI on http://localhost:9099
       |--/model     # weight file
 ```
 
-## Response
-```
-{
-    "original_img": ,
-    "predict_img": ,
-    "result": result[0].tojson() 
-}
-```
-
 ## Usage
 ### Models
 There are 2 Models in model.py:
 ```
-# this is for user to login
+# this is for user to auth
 class User(BaseModel):
     username: str
     password: str
@@ -59,6 +50,15 @@ http://localhost:9099/token
 http://localhost:9099/token
 ```
 Accepts URL or base64 image, and returns the prediction result in JSON format.
+
+## Response
+```
+{
+    "original_img": ,
+    "predict_img": ,
+    "result": result[0].tojson() 
+}
+```
 
 ### Users
 Users are stored in table ```users``` of ```./sysuser.sqlite```, and the default username and password are ```admin``` and ```admin```.
